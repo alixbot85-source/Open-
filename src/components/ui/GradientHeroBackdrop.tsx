@@ -1,0 +1,4 @@
+import React, {useRef} from 'react';
+
+/** Adapted from Le Thanh's Dynamic Animated Hero and Sonu Kumar's Modern Hero on 21st.dev. */
+export function GradientHeroBackdrop(){const ref=useRef<HTMLDivElement>(null);function move(e:React.PointerEvent<HTMLDivElement>){if(e.pointerType==='touch'||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const r=ref.current?.getBoundingClientRect();if(!r)return;ref.current?.style.setProperty('--hero-x',`${e.clientX-r.left}px`);ref.current?.style.setProperty('--hero-y',`${e.clientY-r.top}px`)}return <div ref={ref} className="gradientHeroBackdrop" onPointerMove={move} aria-hidden="true"><div className="heroDotGrid"/><div className="heroCursorGlow"/><svg viewBox="0 0 900 500" preserveAspectRatio="none"><path d="M-20 360 C170 180 270 430 460 235 S720 85 940 245"/><path d="M-40 405 C160 255 300 470 490 290 S730 160 950 310"/></svg></div>}
