@@ -6,10 +6,11 @@ import type { EmailDelivery, Order, User } from '@prisma/client';
 const required = ['SMTP_HOST','SMTP_PORT','SMTP_USER','SMTP_PASSWORD','SMTP_FROM'];
 function configured(){ return required.every(k=>Boolean(process.env[k])); }
 function replace(template:string, values:Record<string,string>){ return template.replace(/{{\s*(\w+)\s*}}/g,(_,key)=>values[key] ?? 'INFORMATION NOT CONFIGURED'); }
+export async function sendAdminMessage(to:string, subject:string, text:string){if(!configured())throw new Error('SMTP is INFORMATION NOT CONFIGURED');const transport=nodemailer.createTransport({host:process.env.SMTP_HOST,port:Number(process.env.SMTP_PORT),secure:Number(process.env.SMTP_PORT)===465,auth:{user:process.env.SMTP_USER,pass:process.env.SMTP_PASSWORD}});await transport.sendMail({from:`${process.env.SMTP_FROM_NAME??'ShadowTm'} <${process.env.SMTP_FROM}>`,to,subject,text});}
 export async function sendOrderDeliveryEmail(delivery: EmailDelivery, order: Order & {user: User}){
  if(!configured()) throw new Error('SMTP is INFORMATION NOT CONFIGURED');
  const pdf=await fs.readFile(path.resolve(delivery.pdfPath));
- const transport=nodemailer.createTransport({host:process.env.SMTP_HOST,port:Number(process.env.SMTP_PORT),secure:Number(process.env.SMTP_PORT)===465,auth:{user:process.env.SMTP_USER,password:process.env.SMTP_PASSWORD}});
+ const transport=nodemailer.createTransport({host:process.env.SMTP_HOST,port:Number(process.env.SMTP_PORT),secure:Number(process.env.SMTP_PORT)===465,auth:{user:process.env.SMTP_USER,pass:process.env.SMTP_PASSWORD}});
  const values={user_name:`${order.user.firstName} ${order.user.lastName??''}`.trim(),order_id:String(order.id),product_name:order.type,country:'INFORMATION NOT CONFIGURED',amount:String(order.price),order_date:order.createdAt.toISOString(),approved_at:order.paymentApprovedAt?.toISOString()??'INFORMATION NOT CONFIGURED'};
  await transport.sendMail({from:`${process.env.SMTP_FROM_NAME??'ShadowTm'} <${process.env.SMTP_FROM}>`,to:delivery.email,subject:replace(delivery.emailSubject,values),text:replace(delivery.emailBody,values),attachments:[{filename:`ShadowTm-Order-${order.id}.pdf`,content:pdf,contentType:'application/pdf'}]});
 }
