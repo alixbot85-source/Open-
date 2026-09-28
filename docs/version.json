@@ -1,1 +1,1 @@
-{"build":"4.7.1","label":"WALLET FIX","commit":"see GitHub REST API","features":["safe non-JSON API handling","TRON address validation","browser fallback for static hosting","checkout wallet synchronization","SMTP-only delivery"]}
+{"build":"4.7.2","label":"PAYMENT FIX","commit":"see GitHub REST API","features":["TRONSCAN URL normalization","safe non-JSON transaction lookup","TRONSCAN public fallback","authenticated order creation","duplicate transaction hash protection"]}
