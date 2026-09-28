@@ -1,6 +1,6 @@
 # ShadowTm Clone
 
-Independent React/Vite implementation of the visible ShadowTm-style experience. Labels and products from the brief are marked as a demo context; this project does **not** connect to banks, SWIFT, SEPA, Fedwire, ACH, TARGET2, payment gateways, or real fund transfers.
+Independent React/Vite implementation of the ShadowTm digital marketplace. This project does **not** connect to banks, SWIFT, SEPA, Fedwire, ACH, TARGET2, payment gateways, settlement systems, or real fund transfers.
 
 ## Run the UI
 ```bash
@@ -16,18 +16,20 @@ The `server/` package implements the requested delivery flow with PostgreSQL/Pri
 cp .env.example .env
 npm install
 npm run api:install
-npx prisma generate
-npx prisma migrate deploy
+npm --prefix server exec prisma generate -- --schema ../prisma/schema.prisma
+npm --prefix server exec prisma migrate deploy -- --schema ../prisma/schema.prisma
 npm run api:dev       # API
 npm run worker        # separate persistent worker
 ```
 
-Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, and `SMTP_FROM_NAME`. `DELIVERY_DELAY_HOURS` defaults to 2. Keep `PRIVATE_STORAGE_PATH` outside the public web root. The PDF endpoint accepts only `application/pdf`, `.pdf`, and enforces `MAX_PDF_BYTES`.
+Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, and `SMTP_FROM_NAME`. Telegram support additionally requires `TELEGRAM_BOT_TOKEN` and `TELEGRAM_SUPPORT_CHAT_ID`; both remain server-side. `TRONGRID_API_KEY` is optional and raises the free lookup quota without exposing the key to browsers. `DELIVERY_DELAY_HOURS` defaults to 2. Keep `PRIVATE_STORAGE_PATH` outside the public web root. The PDF endpoint accepts only `application/pdf`, `.pdf`, and enforces `MAX_PDF_BYTES`.
 
 ### Approval flow
 `POST /api/admin/orders/:id/approve-payment` creates exactly one delivery row, snapshots the user's email and template, and calculates `scheduledFor` from UTC `paymentApprovedAt`. The worker reclaims due `PENDING`/`RETRY` rows after restarts, atomically claims rows to prevent duplicates, verifies approval and file existence, attaches the PDF, and marks `DELIVERED` only after SMTP confirms success. Repeated approval and worker restarts are idempotent. Four attempts are allowed; a final failure becomes `FAILED` and is visible to admins. Rejecting payment creates no delivery.
 
 Relevant API endpoints:
+- `POST /api/support/telegram` (provider-confirmed support delivery)
+- `GET /api/blockchain/tron/transaction/:hash` (read-only public-chain lookup)
 - `POST /api/admin/orders/:id/approve-payment`
 - `POST /api/admin/orders/:id/reject-payment`
 - `GET /api/orders/:id/delivery`

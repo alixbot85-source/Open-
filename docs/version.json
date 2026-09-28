@@ -1,1 +1,1 @@
-{"build":"4.3","label":"API LIVE","commit":"see GitHub REST API","features":["GitHub deployment intelligence","cached free API client","admin integrations monitor"]}
+{"build":"4.4","label":"SUPPORT API","commit":"see GitHub REST API","features":["Telegram Bot API support delivery","TRON Grid transaction hash lookup","manual-review safeguards","provider-confirmed success states","admin integration health"]}
