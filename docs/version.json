@@ -1,1 +1,1 @@
-{"build":"4.4","label":"SUPPORT API","commit":"see GitHub REST API","features":["Telegram Bot API support delivery","TRON Grid transaction hash lookup","manual-review safeguards","provider-confirmed success states","admin integration health"]}
+{"build":"4.5","label":"DELIVERY","commit":"see GitHub REST API","features":["resource email with private PDF","server credential delivery email","license key delivery email","per-order delivery fields","provider-confirmed SMTP status"]}

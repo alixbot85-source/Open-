@@ -30,6 +30,8 @@ Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, and `SM
 Relevant API endpoints:
 - `POST /api/support/telegram` (provider-confirmed support delivery)
 - `GET /api/blockchain/tron/transaction/:hash` (read-only public-chain lookup)
+- `GET|PUT /api/admin/delivery-templates/:type` (`fund`, `server`, or `license`)
+- `POST /api/admin/delivery-templates/:type/pdf` (private resource attachment)
 - `POST /api/admin/orders/:id/approve-payment`
 - `POST /api/admin/orders/:id/reject-payment`
 - `GET /api/orders/:id/delivery`
