@@ -1,1 +1,1 @@
-{"build":"4.9","label":"REVIEW FLOW","commit":"see GitHub REST API","features":["simple payment submission confirmation","manual admin review status","2-10 hour delivery estimate","product-specific email notice","local dashboard order history"]}
+{"build":"5.0","label":"ADMIN REVIEW","commit":"see GitHub REST API","features":["admin browser review queue","local payment approval and rejection","customer email capture","2-10 hour delivery scheduling status","user and admin status synchronization"]}
