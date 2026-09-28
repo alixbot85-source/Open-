@@ -22,19 +22,14 @@ npm run api:dev       # API
 npm run worker        # separate persistent worker
 ```
 
-Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, and `SMTP_FROM_NAME`. Telegram support and order delivery require `TELEGRAM_BOT_TOKEN`, `TELEGRAM_SUPPORT_CHAT_ID`, `TELEGRAM_BOT_USERNAME`, `TELEGRAM_WEBHOOK_SECRET`, `TELEGRAM_LINK_SECRET`, and an HTTPS `PUBLIC_API_URL`; all secrets remain server-side. Configure the webhook through the authenticated admin endpoint after deployment. `TRONGRID_API_KEY` is optional and raises the free lookup quota without exposing the key to browsers. `DELIVERY_DELAY_HOURS` defaults to 2. Keep `PRIVATE_STORAGE_PATH` outside the public web root. The PDF endpoint accepts only `application/pdf`, `.pdf`, and enforces `MAX_PDF_BYTES`.
+Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, and `SMTP_FROM_NAME`. Email support requires `SUPPORT_EMAIL` and the configured SMTP credentials. `TRONGRID_API_KEY` is optional and raises the free lookup quota without exposing the key to browsers. `DELIVERY_DELAY_HOURS` defaults to 2. Keep `PRIVATE_STORAGE_PATH` outside the public web root. The PDF endpoint accepts only `application/pdf`, `.pdf`, and enforces `MAX_PDF_BYTES`.
 
 ### Approval flow
 `POST /api/admin/orders/:id/approve-payment` creates exactly one delivery row, snapshots the user's email and template, and calculates `scheduledFor` from UTC `paymentApprovedAt`. The worker reclaims due `PENDING`/`RETRY` rows after restarts, atomically claims rows to prevent duplicates, verifies approval and file existence, attaches the PDF, and marks `DELIVERED` only after SMTP confirms success. Repeated approval and worker restarts are idempotent. Four attempts are allowed; a final failure becomes `FAILED` and is visible to admins. Rejecting payment creates no delivery.
 
 Relevant API endpoints:
-- `POST /api/support/telegram` (provider-confirmed support delivery)
+- `POST /api/support/email` (provider-confirmed SMTP support request)
 - `GET /api/blockchain/tron/transaction/:hash` (read-only public-chain lookup)
-- `POST /api/telegram/webhook` (signed Telegram updates and first-channel-wins delivery)
-- `POST /api/admin/telegram/test` (provider-confirmed bot identity and optional test message)
-- `POST /api/admin/telegram/configure-webhook`
-- `GET /api/admin/orders/:id/telegram-link` (seven-day signed deep link)
-- `GET /api/orders/:id/telegram-link` (authenticated order owner only)
 - `GET|PUT /api/admin/delivery-templates/:type` (`fund`, `server`, or `license`)
 - `POST /api/admin/delivery-templates/:type/pdf` (private resource attachment)
 - `POST /api/admin/orders/:id/approve-payment`
