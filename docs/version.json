@@ -1,1 +1,1 @@
-{"build":"4.7","label":"EMAIL DELIVERY","commit":"see GitHub REST API","features":["SMTP-only order delivery","resource PDF email","server credential email","license key email","provider-confirmed support email"]}
+{"build":"4.7.1","label":"WALLET FIX","commit":"see GitHub REST API","features":["safe non-JSON API handling","TRON address validation","browser fallback for static hosting","checkout wallet synchronization","SMTP-only delivery"]}
