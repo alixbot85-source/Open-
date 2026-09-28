@@ -1,1 +1,1 @@
-{"build":"4.8","label":"CLOUDFLARE API","commit":"see GitHub REST API","features":["Cloudflare Workers core API","D1 persistent database","runtime API connection panel","authenticated payment orders","admin orders users and audit"]}
+{"build":"4.9","label":"REVIEW FLOW","commit":"see GitHub REST API","features":["simple payment submission confirmation","manual admin review status","2-10 hour delivery estimate","product-specific email notice","local dashboard order history"]}

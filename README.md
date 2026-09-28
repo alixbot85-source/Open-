@@ -47,11 +47,5 @@ Admin routes require the configured `x-admin-email` header as a minimal integrat
 
 Information not available from the specification—bank connections, licenses, settlement, exchange rates, payment gateway, real availability and offledger mechanisms—is not invented here.
 
-## Free Cloudflare Core API
-
-`cloudflare/` contains a deploy-ready Workers + D1 backend for GitHub Pages. It implements authentication, globally persisted wallet settings, real order creation, duplicate transaction-hash protection, Admin orders/users/audit logs, manual payment review, system health, CORS, and a server-side TRON Grid proxy. Deployment instructions are in `cloudflare/README.md`.
-
-After deployment, connect it without rebuilding from **Admin → Integrations → Cloudflare Workers + D1**. The Worker URL is stored locally; the admin key is held in session storage and is not included in public assets.
-
 ## Routes
 `/`, `/server.php`, `/offledger.php`, `/about.php`, `/contact.php`, `/login.php`, `/register.php`, `/checkout.php?id=1&type=server`, `/dashboard`, `/admin`.
