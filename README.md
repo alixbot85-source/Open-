@@ -31,6 +31,7 @@ Relevant API endpoints:
 - `POST /api/support/telegram` (provider-confirmed support delivery)
 - `GET /api/blockchain/tron/transaction/:hash` (read-only public-chain lookup)
 - `POST /api/telegram/webhook` (signed Telegram updates and first-channel-wins delivery)
+- `POST /api/admin/telegram/test` (provider-confirmed bot identity and optional test message)
 - `POST /api/admin/telegram/configure-webhook`
 - `GET /api/admin/orders/:id/telegram-link` (seven-day signed deep link)
 - `GET /api/orders/:id/telegram-link` (authenticated order owner only)

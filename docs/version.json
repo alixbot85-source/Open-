@@ -1,1 +1,1 @@
-{"build":"4.6","label":"TELEGRAM","commit":"see GitHub REST API","features":["signed Telegram webhook","seven-day order deep links","first-channel-wins delivery lock","Telegram PDF and credential delivery","provider-confirmed delivery audit"]}
+{"build":"4.6.1","label":"TELEGRAM TEST","commit":"see GitHub REST API","features":["safe server-side bot verification","provider-confirmed test message","signed Telegram webhook","first-channel-wins delivery lock"]}
