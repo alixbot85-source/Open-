@@ -4,3 +4,6 @@ dist/
 .env
 server/node_modules/
 server/dist/
+cloudflare/node_modules/
+cloudflare/.wrangler/
+cloudflare/wrangler.jsonc
