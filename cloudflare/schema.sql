@@ -110,5 +110,7 @@ INSERT OR IGNORE INTO products(slug,legacy_id,type,name,description,price,metada
 ('managed-server-standard',1,'server','Managed Server Standard','Configurable infrastructure resource with reviewed fulfillment.',156,'{"cpu":"8 vCPU","ram":"32 GB","storage":"500 GB NVMe","bandwidth":"10 Gbps"}',10),
 ('managed-server-business',2,'server','Managed Server Business','Higher-capacity infrastructure package for modern workloads.',250,'{"cpu":"16 vCPU","ram":"64 GB","storage":"1 TB NVMe","bandwidth":"10 Gbps"}',20),
 ('managed-server-scale',3,'server','Managed Server Scale','Advanced configurable infrastructure package.',350,'{"cpu":"24 vCPU","ram":"128 GB","storage":"2 TB NVMe","bandwidth":"20 Gbps"}',30);
+INSERT OR REPLACE INTO payment_settings(id,tron_address,usdt_trc20_address,updated_at) VALUES
+(1,'TGkSu19kCRFtZSWzZHduUcgESqcWQdfD6X','TGkSu19kCRFtZSWzZHduUcgESqcWQdfD6X',CURRENT_TIMESTAMP);
 INSERT OR IGNORE INTO site_settings(key,value,public) VALUES
 ('storefront', '{"resourceFirst":true,"manualReview":true,"deliveryEstimate":"2–10 hours"}', 1);

@@ -6,7 +6,7 @@ The complete database and API source lives in this repository. Cloudflare Worker
 
 - customer accounts and sessions
 - resource and server catalog, prices, status, and metadata
-- public site settings and payment wallets
+- public site settings and the fixed public TRC20 payment destination
 - orders, immutable product snapshots, transaction hashes, and review state
 - delivery queue and frozen recipient email
 - administrator audit history
